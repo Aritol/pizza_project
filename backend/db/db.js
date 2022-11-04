@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
 const { mongoURI } = require("./config");
-mongoose.connect(mongoURI);
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+});
 
 mongoose.connection.on("connected", () => {
   console.log("Database connected");

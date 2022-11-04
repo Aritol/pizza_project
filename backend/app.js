@@ -10,6 +10,7 @@ var usersRouter = require("./routes/users");
 
 var app = express();
 
+require("dotenv").config();
 require("./config");
 require("./db");
 // view engine setup
