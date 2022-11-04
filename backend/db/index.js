@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-mongoose.set("useFindAndModify", false);
-const { mongoURI } = require("./config");
+
+const { mongoURI } = require("../config");
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
 });
