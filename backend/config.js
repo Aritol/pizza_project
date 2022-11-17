@@ -1,4 +1,3 @@
-require("dotenv").config();
 module.exports = {
   databaseName: process.env.DATABASE_NAME,
   databaseUrl: process.env.MONGODB_URL,

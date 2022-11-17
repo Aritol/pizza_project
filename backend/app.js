@@ -6,12 +6,13 @@ var logger = require("morgan");
 var cors = require("cors");
 
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var usersRouter = require("./app_api/routes/users");
+var productsRouter = require("./app_api/routes/products");
 
 var app = express();
 
-require("dotenv");
-require("./config");
+require("dotenv").config();
+// require("./config");
 require("./db");
 // view engine setup
 app.use(cors());
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/products", productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

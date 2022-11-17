@@ -12,7 +12,21 @@ const productScheme = new Schema({
   //   availability: { type: String, required: true },
   price: {
     type: Number,
-    required: true,
+    // required: true,
+    minlength: 1,
+    maxlength: 50,
+    trim: true,
+  },
+  priceS: {
+    type: Number,
+    // required: true,
+    minlength: 1,
+    maxlength: 50,
+    trim: true,
+  },
+  priceM: {
+    type: Number,
+    // required: true,
     minlength: 1,
     maxlength: 50,
     trim: true,
@@ -27,7 +41,6 @@ const productScheme = new Schema({
   photo: {
     data: Buffer,
     contentType: String,
-    require: true,
   },
   category: {
     type: String,

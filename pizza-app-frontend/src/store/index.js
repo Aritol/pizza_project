@@ -3,7 +3,7 @@ import { createStore } from "vuex";
 import products from "./products";
 import auth from "./auth";
 import cart from "./cart";
-import message from "./message";
+// import message from "./message";
 import orders from "./orders";
 
 const store = createStore({
@@ -11,7 +11,7 @@ const store = createStore({
     products,
     auth,
     cart,
-    message,
+    // message,
     orders,
   },
 });

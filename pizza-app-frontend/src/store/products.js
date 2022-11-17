@@ -36,12 +36,12 @@ const store = {
     },
   },
   actions: {
-    loadProducts({ commit }, category) {
+    async loadProducts({ commit }) {
       commit("setLoading", true);
       commit("setError", null);
       //Запит на сервер
-      axios
-        .get(apiEndpoints.products.read(category)) //Асинхронна дія
+      await axios
+        .get(apiEndpoints.products.readList) //Асинхронна дія
         .then(
           //Якщо добре
           (res) => res.data
@@ -93,7 +93,7 @@ const store = {
     updateProduct({ commit }, product) {
       commit("setLoading", true);
       commit("setError", null);
-
+      console.log(product);
       const formData = new FormData();
       for (const key in product) {
         formData.append(key, product[key]);
@@ -121,17 +121,13 @@ const store = {
       });
     },
 
-    getProductById({ commit }, searchData) {
+    getProductById({ commit }, productId) {
       commit("setLoading", true);
       commit("setError", null);
+      console.log(123123123);
       return new Promise((resolve, reject) => {
         axios
-          .get(
-            apiEndpoints.products.getProductById(
-              searchData.category,
-              searchData.id
-            )
-          )
+          .get(apiEndpoints.products.getProductById(productId))
           .then(
             //Якщо добре
             (res) => res.data

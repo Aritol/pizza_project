@@ -5,7 +5,11 @@
         <side-menu />
       </div>
       <div class="content_container">
-        <img src="@/assets/images/pizza_bella_logo.png" alt="" />
+        <img
+          src="@/assets/images/pizza_bella_logo.png"
+          alt=""
+          @click="onMainPage"
+        />
       </div>
     </div>
   </div>
@@ -17,6 +21,12 @@ export default {
   name: "MainPage",
   components: {
     SideMenu,
+  },
+
+  methods: {
+    onMainPage() {
+      this.$router.push({ name: "mainPage" });
+    },
   },
 };
 </script>
@@ -41,7 +51,7 @@ export default {
   background-size: 100% 100%;
   // background-size: cover;
   // background-position: center;
-  background-image: url("../../assets/images/background.jpg");
+  background-image: url("../../assets/images/background.png");
   display: flex;
   justify-content: center;
   align-items: center;

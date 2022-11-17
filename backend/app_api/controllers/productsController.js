@@ -8,8 +8,8 @@ const sendJSONResponse = (res, status, content) => {
 };
 
 module.exports.getList = function (req, res) {
-  // const searchObj = {};
-  const searchObj = { category: req.params.category } || {};
+  const searchObj = {};
+  // const searchObj = { category: req.params.category } || {};
   // console.log("req.params.category");
   // console.log(req.params.category);
 
@@ -29,12 +29,12 @@ module.exports.getList = function (req, res) {
   // });
   // console.log(searchObj);
   ProductModel.find(searchObj, function (err, products) {
-    if (err)
+    if (err) {
       return sendJSONResponse(res, 500, {
         success: false,
         err: { msg: "Fetch faild!" },
       });
-    else {
+    } else {
       if (!products.length) {
         return sendJSONResponse(res, 500, { success: false });
       } else {
@@ -54,27 +54,66 @@ module.exports.add = function (req, res, next) {
       next(err);
       return;
     }
-    let separetedLicense = [];
-    separetedLicense = fields.license.split(",");
-    product = new ProductModel({
-      name: fields.name,
-      price: parseInt(fields.price),
-      description: fields.description,
-      photo: {
-        data: fs.readFileSync(files.photo.filepath),
-        contentType: files.photo.mimetype,
-      },
-      category: fields.category,
-    });
+    // console.log("fields");
+    // console.log(fields);
+    // product = new ProductModel();
+    // if (fields.price) {
+    //   console.log("if");
+    //   product = {
+    //     name: fields.name,
+    //     price: parseInt(fields.price),
+    //     description: fields.description,
+    //     photo: {
+    //       data: fs.readFileSync(files.photo.filepath),
+    //       contentType: files.photo.mimetype,
+    //     },
+    //     category: fields.category,
+    //   };
+    // } else {
+    //   console.log("else");
+    //   product = {
+    //     name: fields.name,
+    //     priceS: parseInt(fields.priceS),
+    //     priceM: parseInt(fields.priceM),
+    //     description: fields.description,
+    //     photo: {
+    //       data: fs.readFileSync(files.photo.filepath),
+    //       contentType: files.photo.mimetype,
+    //     },
+    //     category: fields.category,
+    //   };
+    // }
+    if (fields.price) {
+      product = new ProductModel({
+        name: fields.name,
+        price: parseInt(fields.price),
+        description: fields.description,
+        photo: {
+          data: fs.readFileSync(files.photo.filepath),
+          contentType: files.photo.mimetype,
+        },
+        category: fields.category,
+      });
+    }
+    if (fields.priceS) {
+      product = new ProductModel({
+        name: fields.name,
+        priceS: parseInt(fields.priceS),
+        priceM: parseInt(fields.priceM),
+        description: fields.description,
+        photo: {
+          data: fs.readFileSync(files.photo.filepath),
+          contentType: files.photo.mimetype,
+        },
+        category: fields.category,
+      });
+    }
+    console.log("product");
+    console.log(product);
   });
   form.on("end", function (d) {
     console.log("3333333333");
     num++;
-
-    // if () {
-
-    // }
-    // try {
     //Помилка модуля (викликається двічі)
     if (num == 1) {
       //Збереження моделі і відключення від бази даних
@@ -84,15 +123,12 @@ module.exports.add = function (req, res, next) {
             success: false,
             err: { msg: "Saving faild!" },
           });
+          console.log(err);
           return;
         }
         sendJSONResponse(res, 201, { success: true, data: savedProduct });
       });
     }
-    // } catch (error) {
-    //   console.log("errrrrror");
-
-    // }
   });
 };
 
@@ -108,15 +144,23 @@ module.exports.update = function (req, res, next) {
       next(err);
       return;
     }
-    let separetedLicense = [];
-    separetedLicense = fields.license.split(",");
-    //Створення об’єкта моделі
-    product = {
-      name: fields.name,
-      price: parseFloat(fields.price),
-      description: fields.description,
-      category: fields.category,
-    };
+    if (fields.price) {
+      //Створення об’єкта моделі
+      product = {
+        name: fields.name,
+        price: parseFloat(fields.price),
+        description: fields.description,
+        category: fields.category,
+      };
+    } else {
+      product = {
+        name: fields.name,
+        priceS: parseFloat(fields.priceS),
+        priceM: parseFloat(fields.priceM),
+        description: fields.description,
+        category: fields.category,
+      };
+    }
     req.body.id = fields._id;
     req.body.product = product;
     console.log("req.body.id");
@@ -133,7 +177,7 @@ module.exports.update = function (req, res, next) {
   });
   form.on("end", function (d) {
     console.log("3333333333");
-    console.log("");
+    console.log("asdasdasdasdasdasdasdasdasdasdasd");
     num++;
     //Помилка модуля (викликається двічі)
     if (num == 1) {

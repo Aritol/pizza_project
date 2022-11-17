@@ -4,6 +4,10 @@ import MainPage from "@/pages/MainPage";
 import MenuPage from "@/pages/MenuPage";
 import ContactsPage from "@/pages/ContactsPage";
 import DeliveryPage from "@/pages/DeliveryPage";
+import LoginPage from "@/pages/LoginPage";
+import Signup from "@/pages/Signup";
+import AddPage from "@/pages/AddPage";
+import CartPage from "@/pages/CartPage";
 // import AccessDeniedPage from "@/pages/AccessDeniedPage";
 import PageNotFound from "@/pages/PageNotFound";
 
@@ -12,6 +16,10 @@ const routes = [
   { path: "/contact", component: ContactsPage, name: "contactPage" },
   { path: "/delivery", component: DeliveryPage, name: "deliveryPage" },
   { path: "/menu", component: MenuPage, name: "menuPage" },
+  { path: "/login", component: LoginPage, name: "loginPage" },
+  { path: "/signup", component: Signup, name: "signup" },
+  { path: "/add/:productId?", component: AddPage, name: "addPage" },
+  { path: "/cart", component: CartPage, name: "cartPage" },
 
   //   {
   //     path: "/products/:category",

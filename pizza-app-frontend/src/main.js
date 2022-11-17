@@ -31,7 +31,6 @@ axios.interceptors.response.use(
       // this.clearAuthData();
       localStorage.removeItem("authData");
       localStorage.removeItem("expiresAt");
-      console.log(store);
       store.dispatch("auth/CLEAR_AUTH_DATA");
       // auth.dispatch("CLEAR_AUTH_DATA");
 
@@ -45,27 +44,27 @@ axios.interceptors.response.use(
   }
 );
 //---------------------------
-router.beforeEach((to, from, next) => {
-  let requireAuth = to.matched.some((element) => element.meta.auth);
+// router.beforeEach((to, from, next) => {
+//   let requireAuth = to.matched.some((element) => element.meta.auth);
 
-  let check =
-    (requireAuth && !store.getters["auth/isAuthenticated"]()) ||
-    (!store.getters["auth/isAuthenticated"]() &&
-      ["/signup", "/products/edit", "/products/edit/", "/letters"].includes(
-        to.path
-      ));
+//   let check =
+//     (requireAuth && !store.getters["auth/isAuthenticated"]()) ||
+//     (!store.getters["auth/isAuthenticated"]() &&
+//       ["/signup", "/products/edit", "/products/edit/", "/letters"].includes(
+//         to.path
+//       ));
 
-  //
-  if (check) {
-    // Недопускаємо до захищених роутів, якщо немає токена
+//   //
+//   if (check) {
+//     // Недопускаємо до захищених роутів, якщо немає токена
 
-    next({ path: "/forbidden" });
-    return;
-  } else {
-    next();
-  }
+//     next({ path: "/forbidden" });
+//     return;
+//   } else {
+//     next();
+//   }
 
-  // next();
-});
+//   // next();
+// });
 
 createApp(App).use(router).use(store).mount("#app");

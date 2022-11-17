@@ -18,24 +18,54 @@
           <button @click="this.$router.push({ name: 'deliveryPage' })">
             Доставка
           </button>
+          <button
+            v-if="authenticated"
+            @click="this.$router.push({ name: 'signup' })"
+          >
+            Додати адміністратора
+          </button>
         </div>
-        <div class="social_container"></div>
+        <div class="social_container">
+          <a
+            href="https://instagram.com/maxandreyanov?igshid=YmMyMTA2M2Y="
+            target="_blank"
+            ><img src="@/assets/icons/social_icons/instagram.png" alt=""
+          /></a>
+          <a href="https://www.facebook.com/chilipizzauzhgorod/" target="_blank"
+            ><img src="@/assets/icons/social_icons/facebook.png" alt=""
+          /></a>
+          <a href="https://t.me/MaxDurant" target="_blank"
+            ><img src="@/assets/icons/social_icons/telegram.png" alt=""
+          /></a>
+          <a href="https://twitter.com/elonmusk" target="_blank"
+            ><img src="@/assets/icons/social_icons/twitter.png" alt=""
+          /></a>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "SideMenu",
+  computed: {
+    ...mapGetters("auth", ["authorized"]),
+    authenticated() {
+      return this.authorized;
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .container {
   width: 100%;
-  //   height: 100%;
+  // height: 100%;
   height: 100vh;
+  // position: sticky;
+  // top: 10px;
   max-width: 500px;
   background: linear-gradient(
     179.32deg,
@@ -45,6 +75,7 @@ export default {
     rgba(195, 203, 184, 0.6) 93.23%
   );
   .main_wrapper {
+    // padding-bottom: 10000px;
   }
 }
 
@@ -103,5 +134,13 @@ export default {
 }
 
 .social_container {
+  // margin: 0 auto;
+  padding-top: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  img:hover {
+    cursor: pointer;
+  }
 }
 </style>

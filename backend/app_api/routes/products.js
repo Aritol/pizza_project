@@ -3,9 +3,9 @@ var router = express.Router();
 
 const productsController = require("../controllers/productsController");
 
-router.get("/:category/:id", productsController.getById);
+router.get("/:id", productsController.getById);
 
-router.get("/:category", productsController.getList);
+router.get("/", productsController.getList);
 
 router.delete("/", productsController.delete);
 

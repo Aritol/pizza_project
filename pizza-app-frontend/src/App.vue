@@ -24,6 +24,8 @@ export default {
 @import "@/assets/styles/null.scss";
 @import "@/assets/styles/font.scss";
 .container {
+  max-width: 2000px;
+
   font-family: "Source Serif Pro", serif;
 }
 /* #app {
